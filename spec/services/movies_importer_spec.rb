@@ -46,7 +46,7 @@ RSpec.describe MoviesImporter, type: :service do
       movie = Movie.find_by(title: 'Inception')
       expect(movie.description).to eq('A thief who steals corporate secrets through the use of dream-sharing technology.')
       expect(movie.year).to eq(2010)
-      expect(movie.directors.pluck(:name)).to include('Christopher Nolan')
+      expect(movie.director.name).to eq('Christopher Nolan')
       expect(movie.actors.pluck(:name)).to include('Leonardo DiCaprio')
       expect(movie.locations.pluck(:name)).to include('Paris')
 

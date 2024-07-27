@@ -6,8 +6,7 @@ RSpec.describe Director, type: :model do
   end
 
   describe 'ActiveRecord associations' do
-    it { should have_many(:movie_directors) }
-    it { should have_many(:movies).through(:movie_directors) }
+    it { should have_many(:movies) }
   end
 
   describe 'ActiveModel validations' do

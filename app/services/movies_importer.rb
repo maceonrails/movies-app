@@ -19,11 +19,11 @@ class MoviesImporter
   def import_movies
     CSV.foreach(movies_file_path, headers: true).each_slice(batch_size) do |rows|
       rows.each do |row|
-        movie = save_movie(row)
+        director = save_director(row)
+        movie = save_movie(row, director)
 
         next unless movie
 
-        save_director(row, movie)
         save_actor(row, movie)
         save_location(row, movie)
       end
@@ -43,18 +43,17 @@ class MoviesImporter
     end
   end
 
-  def save_movie(row)
-    Movie.find_or_create_by(title: row['Movie']) do |m|
+  def save_movie(row, director)
+    Movie.find_or_create_by(title: row['Movie'], director: director) do |m|
       m.description = row['Description']
       m.year = row['Year'].to_i
     end
   end
 
-  def save_director(row, movie)
+  def save_director(row)
     return if row['Director'].blank?
 
-    director = Director.find_or_create_by(name: row['Director'])
-    MovieDirector.find_or_create_by(movie: movie, director: director)
+    Director.find_or_create_by(name: row['Director'])
   end
 
   def save_actor(row, movie)
