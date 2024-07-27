@@ -6,12 +6,12 @@ RSpec.describe Movie, type: :model do
   end
 
   describe 'ActiveRecord associations' do
-    it { should have_many(:reviews) }
-    it { should have_many(:movie_directors) }
+    it { should have_many(:reviews).dependent(:destroy) }
+    it { should have_many(:movie_directors).dependent(:destroy) }
     it { should have_many(:directors).through(:movie_directors) }
-    it { should have_many(:movie_actors) }
+    it { should have_many(:movie_actors).dependent(:destroy) }
     it { should have_many(:actors).through(:movie_actors) }
-    it { should have_many(:movie_locations) }
+    it { should have_many(:movie_locations).dependent(:destroy) }
     it { should have_many(:locations).through(:movie_locations) }
   end
 
