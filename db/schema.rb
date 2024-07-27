@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_27_082516) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_27_102134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,18 +18,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_082516) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_actors_on_name"
   end
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_countries_on_name"
   end
 
   create_table "directors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_directors_on_name"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -38,6 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_082516) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_locations_on_country_id"
+    t.index ["name"], name: "index_locations_on_name"
   end
 
   create_table "movie_actors", force: :cascade do |t|
@@ -73,6 +77,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_082516) do
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_movies_on_title"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -83,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_082516) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_reviews_on_movie_id"
+    t.index ["stars"], name: "index_reviews_on_stars"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -90,6 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_082516) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_users_on_name"
   end
 
   add_foreign_key "locations", "countries"
