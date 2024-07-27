@@ -8,4 +8,14 @@ class Movie < ApplicationRecord
 
   validates :title, presence: true
   validates :year, presence: true
+
+  scope :with_average_ratings, -> {
+    left_joins(:reviews)
+      .select('movies.*, COALESCE(AVG(reviews.stars), 0) AS average_rating')
+      .group('movies.id')
+  }
+
+  def average_rating
+    self[:average_rating].to_f.round(2)
+  end
 end
