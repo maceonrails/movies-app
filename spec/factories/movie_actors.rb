@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :movie_actor do
-    movie { nil }
-    actor { nil }
+    movie { create(:movie) }
+    actor { create(:actor) }
   end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :movie_location do
-    movie { nil }
-    location { nil }
+    movie { create(:movie) }
+    location { create(:location) }
   end
 end
