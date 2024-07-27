@@ -1,5 +1,7 @@
 <h1>Movies Overview</h1>
 
+<%= render 'search_form' %>
+
 <table>
   <thead>
     <tr>
@@ -7,6 +9,7 @@
       <th>Description</th>
       <th>Year</th>
       <th>Director</th>
+      <th>Actors</th>
       <th>Average Rating</th>
     </tr>
   </thead>
@@ -17,6 +20,7 @@
         <td><%= movie.description %></td>
         <td><%= movie.year %></td>
         <td><%= movie.director.name %></td>
+        <td><%= movie.actors.map(&:name).join(', ') %></td>
         <td><%= movie.average_rating %></td>
       </tr>
     <% end %>

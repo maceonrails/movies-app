@@ -1,0 +1,9 @@
+<%= form_with url: movies_path, method: :get, local: true do |form| %>
+  <div class="field">
+    <%= form.label :query, "Search for an actor" %>
+    <%= form.text_field :query, { query: params[:query] } || "" %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Search" %>
+  </div>
+<% end %>

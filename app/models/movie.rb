@@ -9,13 +9,11 @@ class Movie < ApplicationRecord
   validates :title, presence: true
   validates :year, presence: true
 
-  scope :with_average_ratings, -> {
-    left_joins(:reviews)
-      .select('movies.*, COALESCE(AVG(reviews.stars), 0) AS average_rating')
-      .group('movies.id')
+  scope :search_by_actor, -> (query) {
+    joins(:actors).where('actors.name ILIKE ?', "%#{query}%").distinct if query.present?
   }
 
-  def average_rating
-    self[:average_rating].to_f.round(2)
+  def update_avg_stars
+    update(average_rating: reviews.average(:stars).to_f.round(2))
   end
 end
